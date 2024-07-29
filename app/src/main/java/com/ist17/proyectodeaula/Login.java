@@ -7,13 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,64 +21,62 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
-    EditText txtCorreo, txtClave;
-    Button btnLogin;
+    private EditText etUsuario, etContrasenia;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        txtCorreo = findViewById(R.id.correo);
-        txtClave = findViewById(R.id.clave);
+        etUsuario = findViewById(R.id.etUsuario);
+        etContrasenia = findViewById(R.id.etContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                String usuario = etUsuario.getText().toString().trim();
+                String contrasenia = etContrasenia.getText().toString().trim();
+                if (!usuario.isEmpty() && !contrasenia.isEmpty()) {
+                    login(usuario, contrasenia);
+                } else {
+                    Toast.makeText(Login.this, "Por favor, ingrese todos los campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    private void login() {
-        String URL = "http://192.168.30.110:8080/Proyecto4to/login.php";
-        final String correo = txtCorreo.getText().toString().trim();
-        final String clave = txtClave.getText().toString().trim();
+    private void login(final String usuario, final String contrasenia) {
+        String url = "http://192.168.30.110:8080/Proyecto4to/login.php";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Login.this, MENU_LOGIN.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Error en la conexión: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
             @Override
-            public void onResponse(String response) {
-                if (response.trim().equals("success")) {
-                    Intent intent = new Intent(Login.this, MENU_LOGIN.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Correo o clave incorrectos", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error al iniciar sesión: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("correo", correo);
-                params.put("clave", clave);
+                params.put("usuario", usuario);
+                params.put("contrasenia", contrasenia);
                 return params;
             }
         };
 
+        // Agregar la solicitud a la cola de peticiones
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }

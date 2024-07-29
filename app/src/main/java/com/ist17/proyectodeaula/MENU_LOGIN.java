@@ -23,7 +23,7 @@ public class MENU_LOGIN extends AppCompatActivity {
         findViewById(R.id.btnn_participantes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MENU_LOGIN.this, MENU.class);
+                Intent intent = new Intent(MENU_LOGIN.this, PerfilUsuario.class);
                 startActivity(intent);
             }
         });

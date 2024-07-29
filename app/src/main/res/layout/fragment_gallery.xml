@@ -2,31 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MENU_LOGIN">
+    android:background="@color/Celeste"
+    tools:context=".ui.gallery.GalleryFragment">
 
-    <Button
-        android:id="@+id/btnn_participantes"
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:id="@+id/text_gallery"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Perfil"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="HOLA"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221" />
+        app:layout_constraintVertical_bias="0.139" />
 
     <Button
-        android:id="@+id/bttn_vehiculos"
+        android:id="@+id/button_ver_datos_vehiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gestion vehiculos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:text="Datos vehiculos"
+        app:layout_constraintTop_toBottomOf="@id/text_gallery"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

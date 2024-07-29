@@ -8,36 +8,40 @@
     tools:context=".Login">
 
     <EditText
-        android:id="@+id/correo"
+        android:id="@+id/etUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Correo Electrónico"
-        android:inputType="textEmailAddress"
+        android:layout_marginTop="16dp"
+        android:hint="Usuario"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.8" />
 
     <EditText
-        android:id="@+id/clave"
+        android:id="@+id/etContrasenia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Clave"
+        android:layout_marginTop="16dp"
+        android:hint="Contraseña"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/correo"
+        app:layout_constraintTop_toBottomOf="@id/etUsuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
-        app:layout_constraintTop_toBottomOf="@id/clave"
+        android:layout_marginTop="16dp"
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@id/etContrasenia"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

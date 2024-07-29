@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class ModificarPiloto extends AppCompatActivity {
 
-    EditText txtCedula, txtNombre, txtApellido, txtFechaNacimiento, txtNacionalidad, txtTelefono, txtCorreoElectronico;
+    EditText txtCedula, txtNombre, txtApellido, txtFechaNacimiento, txtGenero, txtNacionalidad, txtTelefono, txtCorreoElectronico, txtUsuario, txtContrasenia;
     Button btnModificar;
 
     @SuppressLint("MissingInflatedId")
@@ -31,117 +31,59 @@ public class ModificarPiloto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_piloto);
 
-        // Inicializar vistas
         txtCedula = findViewById(R.id.cedula);
         txtNombre = findViewById(R.id.nombre);
         txtApellido = findViewById(R.id.apellido);
         txtFechaNacimiento = findViewById(R.id.fecha_nacimiento);
+        txtGenero = findViewById(R.id.genero);
         txtNacionalidad = findViewById(R.id.nacionalidad);
         txtTelefono = findViewById(R.id.telefono);
         txtCorreoElectronico = findViewById(R.id.correo_electronico);
+        txtUsuario = findViewById(R.id.usuario);
+        txtContrasenia = findViewById(R.id.contrasenia);
         btnModificar = findViewById(R.id.btnModificar);
 
-        // Configurar listener para el botón de modificar
         btnModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCampos()) {
-                    modificarDatos();
-                }
+                modificarDatos();
             }
         });
     }
 
-    private boolean validarCampos() {
-        String cedula = txtCedula.getText().toString().trim();
-        String nombre = txtNombre.getText().toString().trim();
-        String apellido = txtApellido.getText().toString().trim();
-        String fechaNacimiento = txtFechaNacimiento.getText().toString().trim();
-        String nacionalidad = txtNacionalidad.getText().toString().trim();
-        String telefono = txtTelefono.getText().toString().trim();
-        String correoElectronico = txtCorreoElectronico.getText().toString().trim();
-
-        // Validación de la cédula
-        if (cedula.isEmpty() || !cedula.matches("\\d+") || cedula.length() != 10 || cedula.endsWith("4") || (!cedula.startsWith("100") && !cedula.startsWith("04"))) {
-            Toast.makeText(this, "Cédula inválida", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        // Validación de que no haya cédulas duplicadas (esto debería hacerse en el servidor)
-        if (cedula.equals("1111111111")) {
-            Toast.makeText(this, "Cédula duplicada", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (nombre.isEmpty() || !nombre.matches("[a-zA-Z]+") || nombre.length() > 50) {
-            Toast.makeText(this, "Nombre inválido", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (apellido.isEmpty() || !apellido.matches("[a-zA-Z]+") || apellido.length() > 50) {
-            Toast.makeText(this, "Apellido inválido", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (fechaNacimiento.isEmpty() || !fechaNacimiento.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            Toast.makeText(this, "Fecha de nacimiento inválida", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (nacionalidad.isEmpty() || !nacionalidad.matches("[a-zA-Z]+")) {
-            Toast.makeText(this, "Nacionalidad inválida", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (telefono.isEmpty() || !telefono.matches("\\d+") || telefono.length() != 10) {
-            Toast.makeText(this, "Teléfono inválido", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (correoElectronico.isEmpty() || !correoElectronico.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$")) {
-            Toast.makeText(this, "Correo electrónico inválido", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
-    }
-
     private void modificarDatos() {
-        String URL = "http://192.168.30.110:8080/Proyecto4to/modificarlocal.php";
-        final String cedula = txtCedula.getText().toString().trim();
-        final String nombre = txtNombre.getText().toString().trim();
-        final String apellido = txtApellido.getText().toString().trim();
-        final String fechaNacimiento = txtFechaNacimiento.getText().toString().trim();
-        final String nacionalidad = txtNacionalidad.getText().toString().trim();
-        final String telefono = txtTelefono.getText().toString().trim();
-        final String correoElectronico = txtCorreoElectronico.getText().toString().trim();
+        String url = "http://192.168.30.110:8080/Proyecto4to/modificarlocal.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(ModificarPiloto.this, response, Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error al actualizar datos: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ModificarPiloto.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("cedula", cedula);
-                params.put("nombre", nombre);
-                params.put("apellido", apellido);
-                params.put("fecha_nacimiento", fechaNacimiento);
-                params.put("nacionalidad", nacionalidad);
-                params.put("telefono", telefono);
-                params.put("correo_electronico", correoElectronico);
+                params.put("cedula", txtCedula.getText().toString().trim());
+                params.put("nombre", txtNombre.getText().toString().trim());
+                params.put("apellido", txtApellido.getText().toString().trim());
+                params.put("fecha_nacimiento", txtFechaNacimiento.getText().toString().trim());
+                params.put("genero", txtGenero.getText().toString().trim());
+                params.put("nacionalidad", txtNacionalidad.getText().toString().trim());
+                params.put("telefono", txtTelefono.getText().toString().trim());
+                params.put("correo_electronico", txtCorreoElectronico.getText().toString().trim());
+                params.put("usuario", txtUsuario.getText().toString().trim());
+                params.put("contrasenia", txtContrasenia.getText().toString().trim());
                 return params;
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
 }

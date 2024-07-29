@@ -21,9 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-public class VerPiloto extends AppCompatActivity {
+public class VerVehiculos extends AppCompatActivity {
 
-    private static final String TAG = "VerPiloto";  // Añadir una etiqueta para el Log
+    private static final String TAG = "VerVehiculos";
     EditText txtCedula;
     Button btnBuscar;
     TableLayout tableLayout;
@@ -31,7 +31,7 @@ public class VerPiloto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_piloto);
+        setContentView(R.layout.activity_ver_vehiculos);
 
         // Inicializar vistas
         txtCedula = findViewById(R.id.edtCedula);
@@ -44,7 +44,7 @@ public class VerPiloto extends AppCompatActivity {
             public void onClick(View v) {
                 String cedula = txtCedula.getText().toString().trim();
                 if (!cedula.isEmpty()) {
-                    buscarParticipantePorCedula(cedula);
+                    buscarVehiculosPorCedula(cedula);
                 } else {
                     Toast.makeText(getApplicationContext(), "Ingrese una cédula", Toast.LENGTH_SHORT).show();
                 }
@@ -52,9 +52,8 @@ public class VerPiloto extends AppCompatActivity {
         });
     }
 
-    // Método para buscar un participante por cédula
-    private void buscarParticipantePorCedula(String cedula) {
-        String URL = "http://192.168.30.110:8080/Proyecto4to/verusuarioslocal.php?cedula=" + cedula;
+    private void buscarVehiculosPorCedula(String cedula) {
+        String URL = "http://192.168.30.110:8080/Proyecto4to/vervehiculos.php?cedula=" + cedula;
 
         // Realizar solicitud GET con Volley
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
@@ -62,15 +61,15 @@ public class VerPiloto extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Procesar la respuesta recibida del servidor
-                        mostrarParticipantes(response);
+                        mostrarVehiculos(response);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Manejar errores de Volley (por ejemplo, conexión fallida)
-                        Log.e(TAG, "Error al buscar participante: ", error);  // Añadir un log del error
-                        Toast.makeText(getApplicationContext(), "Error al buscar participante: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Error al buscar vehículos: ", error);  // Añadir un log del error
+                        Toast.makeText(getApplicationContext(), "Error al buscar vehículos: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -79,46 +78,46 @@ public class VerPiloto extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    // Método para mostrar los datos de los participantes en la tabla
-    private void mostrarParticipantes(String response) {
+    // Método para mostrar los datos de los vehículos en la tabla
+    private void mostrarVehiculos(String response) {
         tableLayout.removeAllViews();
 
         // Procesar la respuesta recibida del servidor
-        String[] participantes = response.split(";");
+        String[] vehiculos = response.split(";");
 
-        if (participantes.length > 0 && !participantes[0].isEmpty()) {
-            String[] datosParticipante = participantes[0].split(",");
+        if (vehiculos.length > 0 && !vehiculos[0].isEmpty()) {
+            // Crear el encabezado de la tabla
+            TableRow headerRow = new TableRow(this);
 
-            if (datosParticipante.length >= 10) {
-                agregarFila("Cédula", datosParticipante[0]);
-                agregarFila("Nombre", datosParticipante[1]);
-                agregarFila("Apellido", datosParticipante[2]);
-                agregarFila("Fecha Nac.", datosParticipante[3]);
-                agregarFila("Género", datosParticipante[4]);
-                agregarFila("Nacionalidad", datosParticipante[5]);
-                agregarFila("Teléfono", datosParticipante[6]);
-                agregarFila("Correo", datosParticipante[7]);
-                agregarFila("Usuario", datosParticipante[8]);
-                agregarFila("Contraseña", datosParticipante[9]);
-            } else {
-                Toast.makeText(getApplicationContext(), "Datos del participante incompletos", Toast.LENGTH_SHORT).show();
+            TextView header = crearTextViewEncabezado("Datos del Vehículo");
+
+            // Añadir encabezado a la fila de encabezado
+            headerRow.addView(header);
+
+            // Añadir la fila de encabezado a la tabla
+            tableLayout.addView(headerRow);
+
+            // Crear filas para cada vehículo
+            for (String vehiculo : vehiculos) {
+                String[] datosVehiculo = vehiculo.split(",");
+
+                if (datosVehiculo.length >= 8) {
+                    TableRow row = new TableRow(this);
+
+                    // Crear un TextView con los datos del vehículo en una sola columna
+                    TextView textView = crearTextView(datosVehiculo);
+
+                    // Añadir el TextView a la fila
+                    row.addView(textView);
+
+                    // Agregar la fila a la tabla
+                    tableLayout.addView(row);
+                }
             }
         } else {
-            Toast.makeText(getApplicationContext(), "No se encontraron participantes con esa cédula", Toast.LENGTH_SHORT).show();
+            // Mostrar mensaje si no se encontraron vehículos
+            Toast.makeText(getApplicationContext(), "No se encontraron vehículos para ese ocupante", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    // Método para agregar una fila con el encabezado y el valor correspondiente
-    private void agregarFila(String encabezado, String valor) {
-        TableRow row = new TableRow(this);
-
-        TextView textViewEncabezado = crearTextViewEncabezado(encabezado);
-        TextView textViewValor = crearTextView(valor);
-
-        row.addView(textViewEncabezado);
-        row.addView(textViewValor);
-
-        tableLayout.addView(row);
     }
 
     // Método para crear TextView para el encabezado de la tabla
@@ -134,13 +133,22 @@ public class VerPiloto extends AppCompatActivity {
     }
 
     // Método para crear TextView para los datos de la tabla
-    private TextView crearTextView(String texto) {
+    private TextView crearTextView(String[] datosVehiculo) {
+        StringBuilder texto = new StringBuilder();
+        texto.append("ID Vehículo: ").append(datosVehiculo[0]).append("\n");
+        texto.append("Marca: ").append(datosVehiculo[1]).append("\n");
+        texto.append("Modelo: ").append(datosVehiculo[2]).append("\n");
+        texto.append("Año: ").append(datosVehiculo[3]).append("\n");
+        texto.append("Placa: ").append(datosVehiculo[4]).append("\n");
+        texto.append("Color: ").append(datosVehiculo[5]).append("\n");
+        texto.append("ID Ocupante: ").append(datosVehiculo[6]).append("\n");
+        texto.append("Cédula: ").append(datosVehiculo[7]).append("\n");
+
         TextView textView = new TextView(this);
-        textView.setText(texto);
-        textView.setBackgroundColor(Color.WHITE); // Color de fondo blanco para los datos
+        textView.setText(texto.toString());
         textView.setPadding(16, 16, 16, 16);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(14);
+        textView.setGravity(Gravity.START);
+        textView.setTextSize(12);
         textView.setTextColor(Color.BLACK);
         return textView;
     }
