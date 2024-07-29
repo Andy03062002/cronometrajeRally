@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ProyectodeAula</string>
+    <string name="title_activity_perfil_usuario">PerfilUsuario</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Cronometraje del rally</string>
+    <string name="nav_header_subtitle">Intituto Superior 17 de julio</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">XD</string>
+
+    <string name="menu_home">Perfil ocupante</string>
+    <string name="menu_gallery">Vehiculos</string>
+    <string name="menu_slideshow">Informacion</string>
 </resources>

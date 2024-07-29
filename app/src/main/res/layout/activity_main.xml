@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/bttn_menu"
         android:layout_width="164dp"
@@ -26,13 +40,12 @@
         android:layout_height="41dp"
         android:text="Rally de regularidad Volkswagen “Voch-Ibarra”"
         android:textAlignment="center"
-        android:textColor="#105993"
+        android:textColor="#D5180B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.078" />
+        app:layout_constraintVertical_bias="0.202" />
 
     <Button
         android:id="@+id/btn_login"

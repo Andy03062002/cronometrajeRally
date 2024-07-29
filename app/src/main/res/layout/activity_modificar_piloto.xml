@@ -6,67 +6,137 @@
     android:layout_height="match_parent"
     tools:context=".ModificarPiloto">
 
+
+    <!-- Campos para modificar los datos del piloto -->
     <EditText
         android:id="@+id/cedula"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Cédula"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/nombre"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Nombre"
         app:layout_constraintTop_toBottomOf="@id/cedula"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <EditText
         android:id="@+id/apellido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Apellido"
         app:layout_constraintTop_toBottomOf="@id/nombre"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <EditText
         android:id="@+id/fecha_nacimiento"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Fecha Nacimiento"
+        android:hint="Fecha de Nacimiento"
         app:layout_constraintTop_toBottomOf="@id/apellido"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <EditText
+        android:id="@+id/genero"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Género"
+        app:layout_constraintTop_toBottomOf="@id/fecha_nacimiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <EditText
         android:id="@+id/nacionalidad"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Nacionalidad"
-        app:layout_constraintTop_toBottomOf="@id/fecha_nacimiento"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/genero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <EditText
         android:id="@+id/telefono"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Teléfono"
         app:layout_constraintTop_toBottomOf="@id/nacionalidad"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <EditText
         android:id="@+id/correo_electronico"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Correo Electrónico"
         app:layout_constraintTop_toBottomOf="@id/telefono"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <EditText
+        android:id="@+id/usuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Usuario"
+        app:layout_constraintTop_toBottomOf="@id/correo_electronico"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <EditText
+        android:id="@+id/contrasenia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        app:layout_constraintTop_toBottomOf="@id/usuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <Button
         android:id="@+id/btnModificar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Modificar"
-        app:layout_constraintTop_toBottomOf="@id/correo_electronico"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/contrasenia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
