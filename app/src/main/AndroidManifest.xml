@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,11 +17,14 @@
         android:theme="@style/Theme.ProyectodeAula"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".validar_punto"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD6xXqO01e3KRv6AJAapai8qdqcdMVCE-M"
-            />
+            android:value="AIzaSyD6xXqO01e3KRv6AJAapai8qdqcdMVCE-M" />
+
         <activity
             android:name=".punto_control"
             android:exported="false" />
