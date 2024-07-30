@@ -67,11 +67,11 @@ public class validar_punto extends AppCompatActivity {
 
                         boolean puntoDentroDePoligono = false;
                         for (Polygon polygon : polygons) {
-                            if (polygon.isPointInPolygon(currentLat, currentLng)) {
-                                puntoDentroDePoligono = true;
-                                textView2.setText("Punto dentro del polígono: " + polygon.getNombre());
-                                break;
-                            }
+                            //if (polygon.isPointInPolygon(currentLat, currentLng)) {
+                             //   puntoDentroDePoligono = true;
+                              //  textView2.setText("Punto dentro del polígono: " + polygon.getNombre());
+                               // break;
+                            //}
                         }
 
                         if (!puntoDentroDePoligono) {
