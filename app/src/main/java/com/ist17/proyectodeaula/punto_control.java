@@ -37,15 +37,6 @@ public class punto_control extends AppCompatActivity implements OnMapReadyCallba
             mapF.getMapAsync(this);
 
 
-
-
-
-
-
-
-
-
-
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;

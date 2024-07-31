@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ist17.proyectodeaula.VerPiloto;
 import com.ist17.proyectodeaula.VerVehiculos;
 import com.ist17.proyectodeaula.databinding.FragmentGalleryBinding;
+import com.ist17.proyectodeaula.punto_control;
 
 public class GalleryFragment extends Fragment {
 
@@ -36,6 +37,14 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), VerVehiculos.class);
+                startActivity(intent);
+            }
+        });
+        Button bttnVerPDC = binding.bttnVerPDC;
+        bttnVerPDC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), punto_control.class);
                 startActivity(intent);
             }
         });
