@@ -61,17 +61,18 @@ public class validar_punto extends AppCompatActivity {
                     if (location != null) {
                         double currentLat = location.getLatitude();
                         double currentLng = location.getLongitude();
+                        LatLng currentLocation = new LatLng(currentLat, currentLng);
 
-                        // Aquí deberías recuperar la lista de polígonos de la base de datos
-                        List<Polygon> polygons = obtenerPoligonos();
+                        List<Poligono> poligonos = obtenerPoligonos();
 
                         boolean puntoDentroDePoligono = false;
-                        for (Polygon polygon : polygons) {
-                            //if (polygon.isPointInPolygon(currentLat, currentLng)) {
-                             //   puntoDentroDePoligono = true;
-                              //  textView2.setText("Punto dentro del polígono: " + polygon.getNombre());
-                               // break;
-                            //}
+                        for (Poligono poligono : poligonos) {
+                            List<LatLng> puntos = poligono.getPuntos();
+                            if (PolygonUtils.isPointInPolygon(currentLocation, puntos)) {
+                                puntoDentroDePoligono = true;
+                                textView2.setText("Punto dentro del polígono: " + poligono.getNombre());
+                                break;
+                            }
                         }
 
                         if (!puntoDentroDePoligono) {
@@ -83,8 +84,8 @@ public class validar_punto extends AppCompatActivity {
                 });
     }
 
-    private List<Polygon> obtenerPoligonos() {
-        List<Polygon> polygons = new ArrayList<>();
+    private List<Poligono> obtenerPoligonos() {
+        List<Poligono> poligonos = new ArrayList<>();
 
         // Polígono de prueba
         List<LatLng> puntos = new ArrayList<>();
@@ -94,10 +95,10 @@ public class validar_punto extends AppCompatActivity {
         puntos.add(new LatLng(0.40424175460278244, -78.18217400461435));
         puntos.add(new LatLng(0.4069711691580755, -78.18099651485682)); // Cierra el polígono
 
-        //Polygon polygon = new Polygon("ist", puntos);
-        //polygons.add(polygon);
+        Poligono poligono = new Poligono("ist", puntos);
+        poligonos.add(poligono);
 
-        return polygons;
+        return poligonos;
     }
 
     @Override
