@@ -45,7 +45,7 @@ public class EliminarPiloto extends AppCompatActivity {
     }
 
     private void eliminarDatos() {
-        String URL = "http://192.168.30.110:8080/Proyecto4to/eliminarlocal.php";
+        String URL = "http://10.10.28.113:8080/Proyecto4to/eliminarlocal.php";
         final String cedula = txtCedula.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {

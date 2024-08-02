@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/login"
+        android:src="@drawable/fondoinical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,15 +25,15 @@
         android:id="@+id/bttn_menu"
         android:layout_width="164dp"
         android:layout_height="57dp"
-        android:backgroundTint="@color/Green"
+        android:backgroundTint="@color/Blue"
         android:text="Registrarse"
         android:textColorLink="#E81010"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.582"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
+        app:layout_constraintVertical_bias="0.586" />
 
     <TextView
         android:id="@+id/txt_titulo"
@@ -43,7 +43,7 @@
         android:text="Rally de regularidad Volkswagen “Voch-Ibarra”"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="#111112"
+        android:textColor="#F2F2F8"
         android:textColorLink="#F1EAEA"
         android:textSize="20sp"
         android:textStyle="italic"
@@ -52,19 +52,20 @@
         app:layout_constraintHorizontal_bias="0.67"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/Green"
+        android:layout_width="164dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/Blue"
         android:text="Iniciar secion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.398" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

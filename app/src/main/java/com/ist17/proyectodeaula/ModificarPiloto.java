@@ -52,7 +52,7 @@ public class ModificarPiloto extends AppCompatActivity {
     }
 
     private void modificarDatos() {
-        String url = "http://192.168.30.110:8080/Proyecto4to/modificarlocal.php";
+        String url = "http://10.10.28.113:8080/Proyecto4to/modificarlocal.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
