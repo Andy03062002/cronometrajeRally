@@ -31,13 +31,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, punto_control.class);
-                startActivity(intent);
-            }
-        });
 
         findViewById(R.id.validar_pc).setOnClickListener(new View.OnClickListener() {
             @Override

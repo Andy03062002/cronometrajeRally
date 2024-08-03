@@ -28,7 +28,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         etUsuario = findViewById(R.id.etUsuario);
         etContrasenia = findViewById(R.id.etContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
@@ -55,7 +54,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Login.this, MENU_LOGIN.class);
+                        Intent intent = new Intent(Login.this, PerfilUsuario.class);
                         startActivity(intent);
                         finish();
                     }

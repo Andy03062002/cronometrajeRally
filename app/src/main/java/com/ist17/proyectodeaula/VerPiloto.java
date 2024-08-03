@@ -54,7 +54,7 @@ public class VerPiloto extends AppCompatActivity {
 
     // Método para buscar un participante por cédula
     private void buscarParticipantePorCedula(String cedula) {
-        String URL = "http://192.168.30.110:8080/Proyecto4to/verusuarioslocal.php?cedula=" + cedula;
+        String URL = "http://10.10.28.113:8080/Proyecto4to/verusuarioslocal.php?cedula=" + cedula;
 
         // Realizar solicitud GET con Volley
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,

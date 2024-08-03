@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Celeste"
+    android:background="@color/black"
     tools:context=".ui.gallery.GalleryFragment">
-
 
     <TextView
         android:id="@+id/text_gallery"
@@ -15,24 +14,78 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="HOLA"
+        android:text="Bienvenidos a la gestion del vehiculo"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#3BB2E8"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="153dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/vehiculo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_gallery" />
 
     <Button
         android:id="@+id/button_ver_datos_vehiculo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:backgroundTint="#E4DCDC"
+        android:backgroundTintMode="src_in"
         android:text="Datos vehiculos"
-        app:layout_constraintTop_toBottomOf="@id/text_gallery"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#151313"
+        app:iconTint="#EFE8E8"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintVertical_bias="0.188"
+        app:rippleColor="#100F0F" />
+
+    <Button
+        android:id="@+id/bttn_verPDC"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:backgroundTint="#E4DCDC"
+        android:text="Ver punto dee control"
+        android:textColor="#171616"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/bttn_registrarpunto"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:backgroundTint="#E4DCDC"
+        android:text="Registrar Punto"
+        android:textColor="#1B1919"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <Button
+        android:id="@+id/bttn_registrar"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:backgroundTint="#E4DCDC"
+        android:text="Registrar vehiculos"
+        android:textColor="#090808"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

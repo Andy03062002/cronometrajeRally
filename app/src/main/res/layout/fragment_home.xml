@@ -4,52 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Celeste"
+    android:background="@color/black"
     tools:context=".ui.home.HomeFragment">
+
 
     <TextView
         android:id="@+id/text_home"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bienvenido"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Bienvenidos a la gestion del Ocupante"
+        android:textAlignment="center"
+        android:textColor="#3BB2E8"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14" />
-
-    <Button
-        android:id="@+id/button_modificar_piloto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Modificar"
-        app:layout_constraintTop_toBottomOf="@id/text_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_eliminar_ocupante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#E4DCDC"
+        android:backgroundTintMode="src_in"
         android:text="Eliminar Ocupante"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#151313"
+        app:iconTint="#EFE8E8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71" />
+        app:layout_constraintTop_toBottomOf="@id/button_modificar_piloto"
+        app:rippleColor="#100F0F" />
+
+    <Button
+        android:id="@+id/button_modificar_piloto"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#E4DCDC"
+        android:backgroundTintMode="src_in"
+        android:text="Modificar Ocupante"
+        android:textColor="#151313"
+        app:iconTint="#EFE8E8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView2"
+        app:rippleColor="#100F0F" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="153dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/perfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_home" />
 
     <Button
         android:id="@+id/button_ver_datos_ocupante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver datos ocupante"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="423dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#E4DCDC"
+        android:backgroundTintMode="src_in"
+        android:text="Datos Ocupante"
+        android:textColor="#151313"
+        app:iconTint="#EFE8E8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862" />
+        app:layout_constraintTop_toBottomOf="@id/button_eliminar_ocupante"
+        app:rippleColor="#100F0F" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
