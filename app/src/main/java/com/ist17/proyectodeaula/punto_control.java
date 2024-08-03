@@ -10,6 +10,13 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,7 +27,9 @@ import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class punto_control extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
@@ -90,16 +99,16 @@ public class punto_control extends AppCompatActivity implements OnMapReadyCallba
             String nombrePoligono = txtNombrePC.getText().toString();
 
             // Construir la cadena con los puntos del polígono
-            StringBuilder puntos = new StringBuilder("Puntos: ");
+            StringBuilder puntos = new StringBuilder();
             for (LatLng punto : polygonPoints) {
-                puntos.append("\nLat: ").append(punto.latitude).append(", Lng: ").append(punto.longitude);
+                puntos.append(punto.latitude).append(",").append(punto.longitude).append(";");
             }
 
-            // Mostrar el nombre del polígono y los puntos en un Toast
-            Toast.makeText(this, "Polígono " + nombrePoligono + " guardado." + "\n" + puntos.toString(), Toast.LENGTH_LONG).show();
+            // Llamar al método para insertar los datos
+            insertarDatos(nombrePoligono, puntos.toString());
 
-            // Aquí puedes manejar la lógica para guardar el nombre y los puntos del polígono
-            // por ejemplo, almacenarlos en una base de datos o enviarlos a un servidor.
+            // Mostrar el nombre del polígono y los puntos en un Toast
+            Toast.makeText(this, "Polígono " + nombrePoligono + " guardado.", Toast.LENGTH_LONG).show();
         } else if (!isPolygonClosed) {
             Toast.makeText(this, "Primero cierra el polígono antes de guardarlo.", Toast.LENGTH_SHORT).show();
         } else {
@@ -107,4 +116,31 @@ public class punto_control extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
+    private void insertarDatos(String nombrePoligono, String puntos) {
+        String url = "http://10.10.28.113:8080/Proyecto4to/insertarlocal.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(punto_control.this, response, Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(punto_control.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("nombrePoligono", nombrePoligono);
+                params.put("puntos", puntos);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
 }
