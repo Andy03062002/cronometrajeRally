@@ -32,13 +32,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.validar_pc).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, validar_punto.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 

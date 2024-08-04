@@ -7,7 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,44 +23,53 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Login extends AppCompatActivity {
+public class codigo_correo extends AppCompatActivity {
 
-    private EditText etUsuario, etContrasenia;
-    private Button btnLogin;
+    private EditText etCodigo;
+    private Button btnIngresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        etUsuario = findViewById(R.id.etUsuario);
-        etContrasenia = findViewById(R.id.etContrasenia);
-        btnLogin = findViewById(R.id.btnLogin);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_codigo_correo);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        etCodigo = findViewById(R.id.editTextText2);
+        btnIngresar = findViewById(R.id.button);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usuario = etUsuario.getText().toString().trim();
-                String contrasenia = etContrasenia.getText().toString().trim();
-                if (!usuario.isEmpty() && !contrasenia.isEmpty()) {
-                    login(usuario, contrasenia);
+                String codigo = etCodigo.getText().toString().trim();
+                if (!codigo.isEmpty()) {
+                    verificarCodigo(codigo);
                 } else {
-                    Toast.makeText(Login.this, "Por favor, ingrese todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(codigo_correo.this, "Por favor, ingrese el código de verificación", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void login(final String usuario, final String contrasenia) {
-        String url = "http://192.168.3.34:8088/Proyecto4to/login.php";
+    private void verificarCodigo(final String codigo) {
+        String url = "http://192.168.3.34:8088/Proyecto4to/verificar_codigo.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Login.this, codigo_correo.class);
-                        startActivity(intent);
-                        finish();
+                        if (response.equals("Codigo correcto")) {
+                            Intent intent = new Intent(codigo_correo.this, PerfilUsuario.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -69,13 +82,11 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("usuario", usuario);
-                params.put("contrasenia", contrasenia);
+                params.put("codigo", codigo);
                 return params;
             }
         };
 
-        // Agregar la solicitud a la cola de peticiones
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
