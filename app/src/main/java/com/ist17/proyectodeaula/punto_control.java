@@ -129,7 +129,7 @@ public class punto_control extends AppCompatActivity implements OnMapReadyCallba
     }
 
     private void insertarDatos(String nombrePoligono, String puntosJson) {
-        String url = "http://192.168.3.34:8088/Proyecto4to/guardarPC.php";
+        String url = "http://10.10.24.218:8088/Proyecto4to/guardarPC.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

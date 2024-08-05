@@ -45,7 +45,8 @@ public class validar_punto extends AppCompatActivity {
     private TextView textView2;
     private Spinner spinnerPoligonos;
     private FusedLocationProviderClient fusedLocationClient;
-    private List<Poligono> poligonos;
+
+    ArrayList<Poligono> poligonos = new ArrayList<Poligono>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class validar_punto extends AppCompatActivity {
     }
 
     private void obtenerPoligonosDesdeServidor() {
-        String url = "http://192.168.3.34:8088/Proyecto4to/obtenerPoligonos.php";
+        String url = "http://10.10.24.218:8088/Proyecto4to/obtenerPoligonos.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -82,7 +83,7 @@ public class validar_punto extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
 
-                            poligonos = new ArrayList<>();
+
                             List<String> nombresPoligonos = new ArrayList<>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -92,31 +93,27 @@ public class validar_punto extends AppCompatActivity {
 
                                 Log.d("Poligono", "Nombre: " + nombre + ", Ubicacion: " + ubicacion);
 
-                                String[] puntosString = ubicacion.split(";");
+                                JSONArray puntosArray = new JSONArray(ubicacion);
                                 List<LatLng> puntos = new ArrayList<>();
-                                for (String puntoString : puntosString) {
-                                    if (!puntoString.isEmpty()) {
-                                        String[] latLng = puntoString.split(",");
-                                        if (latLng.length == 2) {
-                                            try {
-                                                double lat = Double.parseDouble(latLng[0]);
-                                                double lng = Double.parseDouble(latLng[1]);
-                                                puntos.add(new LatLng(lat, lng));
-                                            } catch (NumberFormatException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    }
+                                for (int j = 0; j < puntosArray.length(); j++) {
+                                    JSONObject puntoObject = puntosArray.getJSONObject(j);
+                                    double lat = puntoObject.getDouble("latitude");
+                                    double lng = puntoObject.getDouble("longitude");
+                                    puntos.add(new LatLng(lat, lng));
                                 }
 
                                 Poligono poligono = new Poligono(nombre, puntos);
                                 poligonos.add(poligono);
                                 nombresPoligonos.add(nombre);
                             }
+                            for (int i=0;i<poligonos.size();i++){
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(validar_punto.this, android.R.layout.simple_spinner_item,nombresPoligonos);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinnerPoligonos.setAdapter(adapter);
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(validar_punto.this, android.R.layout.simple_spinner_item, nombresPoligonos);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            spinnerPoligonos.setAdapter(adapter);
+                            }
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(validar_punto.this, "Error al parsear la respuesta JSON: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -130,6 +127,17 @@ public class validar_punto extends AppCompatActivity {
         });
 
         requestQueue.add(stringRequest);
+    }
+
+    public void obtenerUbicacion(){
+        Poligono nombre = poligonos.get(spinnerPoligonos.getSelectedItemPosition());
+        for (Poligono p:poligonos) {
+            if(nombre.equals(p.getNombre())){
+                p.getPuntos();
+            }
+        }
+
+
     }
 
     private void validarPuntoActual() {
@@ -147,6 +155,7 @@ public class validar_punto extends AppCompatActivity {
 
                         if (poligonos != null && !poligonos.isEmpty()) {
                             Poligono poligonoSeleccionado = poligonos.get(spinnerPoligonos.getSelectedItemPosition());
+                            Toast.makeText(this, "---------------------------"+poligonos.get(0).getPuntos(), Toast.LENGTH_SHORT).show();
                             List<LatLng> puntos = poligonoSeleccionado.getPuntos();
 
                             if (PolygonUtils.isPointInPolygon(currentLocation, puntos)) {
@@ -164,11 +173,8 @@ public class validar_punto extends AppCompatActivity {
                 });
     }
 
-
-
-
     private void guardarPasoPunto(LatLng currentLocation) {
-        String url = "http://192.168.3.34:8088/Proyecto4to/guardarPasoPunto.php";
+        String url = "http://10.10.24.218:8088/Proyecto4to/guardarPasoPunto.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -186,7 +192,7 @@ public class validar_punto extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("id_inscripcion", "1"); // Reemplaza con el ID de inscripción correspondiente
+                params.put("id_inscripcion", "3"); // Reemplaza con el ID de inscripción correspondiente
                 params.put("ubicacion", currentLocation.latitude + "," + currentLocation.longitude);
                 params.put("horaDePaso", String.valueOf(System.currentTimeMillis())); // Timestamp actual
                 return params;

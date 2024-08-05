@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void login(final String usuario, final String contrasenia) {
-        String url = "http://192.168.3.34:8088/Proyecto4to/login.php";
+        String url = "http://10.10.24.218:8088/Proyecto4to/login.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

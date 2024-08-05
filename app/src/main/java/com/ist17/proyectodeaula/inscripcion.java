@@ -50,7 +50,7 @@ public class inscripcion extends AppCompatActivity {
     }
 
     private void enviarInscripcion(final String cedula) {
-        String url = "http://10.10.28.113:8080/Proyecto4to/inscripcion.php";
+        String url = "http://10.10.24.218:8088/Proyecto4to/inscripcion.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

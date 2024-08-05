@@ -94,7 +94,7 @@ public class Registrovehiculos extends AppCompatActivity {
         }
 
         // URL del servidor donde se enviarán los datos
-        String URL = "http://192.168.3.34:8088/Proyecto4to/insertarVehiculo.php";
+        String URL = "http://10.10.24.218:8088/Proyecto4to/insertarVehiculo.php";
 
         // Crear una solicitud POST usando Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {

@@ -57,7 +57,7 @@ public class codigo_correo extends AppCompatActivity {
     }
 
     private void verificarCodigo(final String codigo) {
-        String url = "http://192.168.3.34:8088/Proyecto4to/verificar_codigo.php";
+        String url = "http://10.10.24.218:8088/Proyecto4to/verificar_codigo.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
